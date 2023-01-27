@@ -8,7 +8,19 @@ namespace EncryptionLibrary
 {
     public class Atbash
     {
-        private string Line { get; set; }
+        private string line;
+        private string Line
+        {
+            get
+            {
+                return line;
+            }
+
+            set
+            {
+                line = value;
+            }
+        }
 
         private char[] masAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
                                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
