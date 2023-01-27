@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace EncryptionLibrary
 {
-    internal class Atbash
+    public class Atbash
     {
+        private char[] masAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                               'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                               's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+        private void Reverse() => Array.Reverse(masAlphavit);
     }
 }
