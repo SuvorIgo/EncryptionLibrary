@@ -28,6 +28,32 @@ namespace EncryptionLibrary
 
         public Atbash(string line) => Line = line;
 
+        public string Encrypt()
+        {
+            Reverse();
+            var result = String.Empty;
+
+            for (int i = 0; i <= Line.Length; i++)
+            {
+                result += masAlphavit[Line[i]];
+            }
+
+            return result;
+        }
+
+        public string Decrypt()
+        {
+            if (masAlphavit[0] is 'z') Reverse();
+            var result = String.Empty;
+
+            for (int i = 0; i < Line.Length; i++)
+            {
+                result += masAlphavit[Line[i]];
+            }
+
+            return result;
+        }
+
         private void Reverse() => Array.Reverse(masAlphavit);
     }
 }
