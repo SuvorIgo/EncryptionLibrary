@@ -8,7 +8,7 @@ namespace EncryptionLibrary.Interfaces
 {
     interface IEncryption
     {
-        public void Encrypt();
-        public void Decrypt();
+        public string Encrypt();
+        public string Decrypt();
     }
 }
