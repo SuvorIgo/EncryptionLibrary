@@ -7,11 +7,9 @@ using EncryptionLibrary.Interfaces;
 
 namespace EncryptionLibrary.Abstractions
 {
-    abstract class Encryption : IEncryption
+    public abstract class Encryption : IEncryption
     {
-        private string Line { get; set; }
-
-        public Encryption(string line) => Line = line;
+        protected string? Line { get; set; }
 
         public abstract string Encrypt();
         public abstract string Decrypt();
