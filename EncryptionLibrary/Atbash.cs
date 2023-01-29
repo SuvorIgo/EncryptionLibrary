@@ -11,8 +11,8 @@ namespace EncryptionLibrary
         private string Line { get; set; }
 
         private char[] masAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-                               'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-                               's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+                                       'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                                       's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
         public Atbash(string line) => Line = line;
 
@@ -34,12 +34,16 @@ namespace EncryptionLibrary
 
         public string Decrypt()
         {
-            if (masAlphavit[0] is 'z') Reverse();
+            var keys = GetMassiveKeys();
+
+            Reverse();
+
             var result = String.Empty;
 
-            for (int i = 0; i < Line.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
-                result += masAlphavit[Line[i]];
+                if (keys[i] == -1) result += " ";
+                else result += masAlphavit[keys[i]];
             }
 
             return result;
@@ -48,6 +52,7 @@ namespace EncryptionLibrary
         private int[] GetMassiveKeys()
         {
             int[] massive = new int[Line.Length];
+
             for (int i = 0; i < Line.Length; i++)
             {
                 if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
@@ -56,8 +61,6 @@ namespace EncryptionLibrary
 
             return massive;
         }
-
-
 
         private void Reverse() => Array.Reverse(masAlphavit);
     }
