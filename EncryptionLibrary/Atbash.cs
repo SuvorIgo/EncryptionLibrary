@@ -8,19 +8,7 @@ namespace EncryptionLibrary
 {
     public class Atbash
     {
-        private string? line;
-        private string Line
-        {
-            get
-            {
-                return line;
-            }
-
-            set
-            {
-                line = value;
-            }
-        }
+        private string Line { get; set; }
 
         private char[] masAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
                                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
@@ -30,12 +18,15 @@ namespace EncryptionLibrary
 
         public string Encrypt()
         {
+            var keys = GetMassiveKeys();
             Reverse();
+
             var result = String.Empty;
 
-            for (int i = 0; i <= Line.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
-                result += masAlphavit[Line[i]];
+                if (keys[i] == -1) result += " ";
+                else result += masAlphavit[keys[i]];
             }
 
             return result;
@@ -54,7 +45,7 @@ namespace EncryptionLibrary
             return result;
         }
 
-        public int[] GetMassiveKeys()
+        private int[] GetMassiveKeys()
         {
             int[] massive = new int[Line.Length];
             for (int i = 0; i < Line.Length; i++)
