@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public class Atbash : Encryption
     {
-        private readonly char[] masAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+        private readonly char[] arrayAlphavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
                                                 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
                                                 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
@@ -16,7 +16,7 @@ namespace EncryptionLibrary
 
         public override string Encrypt()
         {
-            var keys = GetMassiveKeys();
+            var keys = GetArrayKeys();
             Reverse();
 
             var result = String.Empty;
@@ -24,7 +24,7 @@ namespace EncryptionLibrary
             for (int i = 0; i < keys.Length; i++)
             {
                 if (keys[i] == -1) result += " ";
-                else result += masAlphavit[keys[i]];
+                else result += arrayAlphavit[keys[i]];
             }
 
             return result;
@@ -32,7 +32,7 @@ namespace EncryptionLibrary
 
         public override string Decrypt()
         {
-            var keys = GetMassiveKeys();
+            var keys = GetArrayKeys();
 
             Reverse();
 
@@ -41,25 +41,25 @@ namespace EncryptionLibrary
             for (int i = 0; i < keys.Length; i++)
             {
                 if (keys[i] == -1) result += " ";
-                else result += masAlphavit[keys[i]];
+                else result += arrayAlphavit[keys[i]];
             }
 
             return result;
         }
 
-        private int[] GetMassiveKeys()
+        private int[] GetArrayKeys()
         {
             int[] massive = new int[Line.Length];
 
             for (int i = 0; i < Line.Length; i++)
             {
                 if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.BinarySearch(masAlphavit, Line[i]);
+                else massive[i] = Array.BinarySearch(arrayAlphavit, Line[i]);
             }
 
             return massive;
         }
 
-        private void Reverse() => Array.Reverse(masAlphavit);
+        private void Reverse() => Array.Reverse(arrayAlphavit);
     }
 }
