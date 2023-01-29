@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public class Atbash
     {
-        private string line;
+        private string? line;
         private string Line
         {
             get
@@ -53,6 +53,20 @@ namespace EncryptionLibrary
 
             return result;
         }
+
+        public int[] GetMassiveKeys()
+        {
+            int[] massive = new int[Line.Length];
+            for (int i = 0; i < Line.Length; i++)
+            {
+                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
+                else massive[i] = Array.BinarySearch(masAlphavit, Line[i]);
+            }
+
+            return massive;
+        }
+
+
 
         private void Reverse() => Array.Reverse(masAlphavit);
     }
