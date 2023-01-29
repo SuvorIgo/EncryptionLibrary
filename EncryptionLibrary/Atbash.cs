@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EncryptionLibrary
 {
-    public class Atbash : Encryption
+    public sealed class Atbash : Encryption
     {
         public Atbash(string line) => Line = line;
 

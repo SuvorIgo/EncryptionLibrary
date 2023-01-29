@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EncryptionLibrary
 {
-    public class Caesar : Encryption
+    public sealed class Caesar : Encryption
     {
         public Caesar(string line) => Line = line;
 
