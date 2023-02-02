@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public sealed class Atbash : Encryption
     {
-        public Atbash(string line) : base(line) { }
+        public Atbash(string line) => Line = line;
 
         public override string Encrypt()
         {

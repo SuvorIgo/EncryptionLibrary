@@ -22,26 +22,6 @@ namespace EncryptionLibrary
             Step = step;
         }
 
-        private char[] GetArrayAlphavitWithStep()
-        {
-            for (int i = 0; i < arrayAlphavit.Length; i++)
-            {
-                arrayAlphavit[i] = (char)(arrayAlphavit[i] >> 1);
-            }
-
-            return arrayAlphavit;
-        }
-
-        public void Display()
-        {
-            GetArrayAlphavitWithStep();
-
-            foreach (var item in arrayAlphavit)
-            {
-                Console.Write($"{item} ");
-            }
-        }
-
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
     }
