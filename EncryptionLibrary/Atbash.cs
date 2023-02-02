@@ -45,7 +45,7 @@ namespace EncryptionLibrary
 
         private int[] GetArrayKeys()
         {
-            int[] massive = new int[Line?.Length];
+            int[] massive = new int[Line.Length];
 
             for (int i = 0; i < Line.Length; i++)
             {
