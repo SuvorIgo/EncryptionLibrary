@@ -26,13 +26,14 @@ namespace EncryptionLibrary
         {
             for (int i = 0; i < arrayAlphavit.Length; i++)
             {
-                arrayAlphavit[i] = (char)(arrayAlphavit[i] + 1);
+                if ((char)arrayAlphavit[i] == 'z') arrayAlphavit[i] = (char)(arrayAlphavit[i] - 25);
+                else arrayAlphavit[i] = (char)(arrayAlphavit[i] + 1);
             }
 
             return arrayAlphavit;
         }
 
-        public void Display()
+        /*public void Display()
         {
             GetArrayAlphavitWithStep();
 
@@ -40,7 +41,7 @@ namespace EncryptionLibrary
             {
                 Console.Write($"{item} ");
             }
-        }
+        }*/
 
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
