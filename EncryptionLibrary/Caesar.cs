@@ -8,7 +8,13 @@ namespace EncryptionLibrary
 {
     public sealed class Caesar : Encryption
     {
-        public Caesar(string line) => Line = line;
+        public int Step { get; set; }
+
+        public Caesar(string line, string step)
+            : base(line)
+        { 
+            Step = 1;
+        } 
 
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
