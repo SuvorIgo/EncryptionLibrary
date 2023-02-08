@@ -9,6 +9,7 @@ namespace EncryptionLibrary
     public sealed class Caesar : Encryption
     {
         private int Step { get; set; }
+        private string Side { get; set; }
 
         public Caesar(string line)
             : base(line)
@@ -17,9 +18,16 @@ namespace EncryptionLibrary
         }
 
         public Caesar(string line, int step)
-            : base(line)
+            : base(line) 
         {
             Step = step;
+        }
+
+        public Caesar(string line, int step, string side)
+            : base(line) 
+        { 
+            Step = step;
+            Side = side;
         }
 
         private char[] GetArrayAlphavitWithStep()
@@ -46,6 +54,8 @@ namespace EncryptionLibrary
 
             return result;
         }
+
+        
 
         /*public void Display()
         {
