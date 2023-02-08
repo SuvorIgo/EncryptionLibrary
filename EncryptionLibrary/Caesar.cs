@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public sealed class Caesar : Encryption
     {
-        public int Step { get; set; }
+        private int Step { get; set; }
 
         public Caesar(string line)
             : base(line)
@@ -24,22 +24,36 @@ namespace EncryptionLibrary
 
         private char[] GetArrayAlphavitWithStep()
         {
-            for (int i = 0; i < arrayAlphavit.Length; i++)
+            char[] result = new char[26];
+
+            result[0] = (char)(arrayAlphavit[0] + Step);
+
+            for (int i = 1; i < arrayAlphavit.Length; i++)
             {
-                if ((char)arrayAlphavit[i] == 'z') arrayAlphavit[i] = (char)(arrayAlphavit[i] - 25);
-                else arrayAlphavit[i] = (char)(arrayAlphavit[i] + 1);
+                if (result[i-1] == 'z')
+                {
+                    result[i] = (char)(arrayAlphavit[^1] - 25);
+                    continue;
+                }
+                else
+                    result[i] = (char)(result[i-1] + 1);
+
+                if ((char)result[i] == 'z')
+                {
+                    result[i + 1] = (char)(arrayAlphavit[^1] - 25); i += 1;
+                }
             }
 
-            return arrayAlphavit;
+            return result;
         }
 
         /*public void Display()
         {
-            GetArrayAlphavitWithStep();
+            var result = GetArrayAlphavitWithStep();
 
-            foreach (var item in arrayAlphavit)
+            foreach (var item in result)
             {
-                Console.Write($"{item} ");
+                Console.Write($"{item} {(uint)item} ");
             }
         }*/
 
