@@ -9,7 +9,7 @@ namespace EncryptionLibrary
     public sealed class Caesar : Encryption
     {
         private int Step { get; set; }
-        private string Side { get; set; }
+        private string Side { get; set; } = "left";
 
         public Caesar(string line)
             : base(line)
@@ -103,11 +103,15 @@ namespace EncryptionLibrary
 
             foreach (var item in result)
             {
-                Console.Write($"{item} {(uint)item}");
+                Console.Write($"{item} {(uint)item}  ");
             }
         }
 
-        public override string Encrypt() { return "There is no implementation yet"; }
+        public override string Encrypt() 
+        { 
+            return "There is no implementation yet"; 
+        }
+
         public override string Decrypt() { return "There is no implementation yet"; }
     }
 }
