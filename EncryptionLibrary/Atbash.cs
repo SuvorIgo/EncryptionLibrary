@@ -50,7 +50,7 @@ namespace EncryptionLibrary
             for (int i = 0; i < Line.Length; i++)
             {
                 if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.IndexOf(arrayAlphavit, Line[i]);
+                else massive[i] = Array.BinarySearch(arrayAlphavit, Line[i]);
             }
 
             return massive;
