@@ -94,8 +94,19 @@ namespace EncryptionLibrary
 
             return result;
         }
-        
-        
+
+        private int[] GetArrayKeys(char[] alphavit)
+        {
+            int[] massive = new int[Line.Length];
+
+            for (int i = 0; i < Line.Length; i++)
+            {
+                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
+                else massive[i] = Array.BinarySearch(alphavit, Line[i]);
+            }
+
+            return massive;
+        }
 
         public void Display()
         {
@@ -103,15 +114,49 @@ namespace EncryptionLibrary
 
             foreach (var item in result)
             {
-                Console.Write($"{item} {(uint)item}  ");
+                Console.Write($"[{Array.IndexOf(result, item)}]{item} {(uint)item}  ");
+            }
+
+            var resultTwo = GetArrayKeys(result);
+
+            Console.WriteLine("\n_________");
+
+            foreach (var item in resultTwo)
+            {
+                Console.Write($"  {item}  ");
             }
         }
 
+
+
         public override string Encrypt() 
-        { 
-            return "There is no implementation yet"; 
+        {
+            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
+            var keys = GetArrayKeys(arrayAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += encryptionAlphavit[keys[i]];
+            }
+            
+            return result; 
         }
 
-        public override string Decrypt() { return "There is no implementation yet"; }
+        public override string Decrypt() 
+        {
+            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
+            var keys = GetArrayKeys(encryptionAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += arrayAlphavit[keys[i]];
+            }
+
+            return result;
+        }
     }
 }
