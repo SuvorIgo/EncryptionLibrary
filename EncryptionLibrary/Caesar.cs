@@ -33,7 +33,7 @@ namespace EncryptionLibrary
         private char[] GetArrayAlphavitWithStep()
         {
             char[] result = new char[26];
-
+           
             result[0] = (char)(arrayAlphavit[0] + Step);
 
             for (int i = 1; i < arrayAlphavit.Length; i++)
@@ -55,17 +55,57 @@ namespace EncryptionLibrary
             return result;
         }
 
+        private char[] GetArrayAlphavitWithStepAndSide()
+        {
+            char[] result = new char[26];
+
+            switch (Side)
+            {
+                case "right":
+                    if (Step > 1)
+                        result[0] = (char)(arrayAlphavit[^1] - Step + 1);
+                    else 
+                        result[0] = (char)(arrayAlphavit[^1]);
+
+                    for (int i = 1; i < arrayAlphavit.Length; i++)
+                    {
+                        if (result[i - 1] == 'z')
+                        {
+                            result[i] = (char)(arrayAlphavit[^1] - 25);
+                            continue;
+                        }
+                        else
+                            result[i] = (char)(result[i - 1] + 1);
+
+                        if ((char)result[i] == 'z')
+                        {
+                            result[i + 1] = (char)(arrayAlphavit[^1] - 25); i += 1;
+                        }
+                    }
+
+                    break;
+
+                case "left":
+                    result = GetArrayAlphavitWithStep();
+                    break;
+
+                default: throw new ArgumentException();
+            }
+
+            return result;
+        }
+        
         
 
-        /*public void Display()
+        public void Display()
         {
-            var result = GetArrayAlphavitWithStep();
+            var result = GetArrayAlphavitWithStepAndSide();
 
             foreach (var item in result)
             {
-                Console.Write($"{item} {(uint)item} ");
+                Console.Write($"{item} {(uint)item}");
             }
-        }*/
+        }
 
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
