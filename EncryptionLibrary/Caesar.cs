@@ -102,32 +102,11 @@ namespace EncryptionLibrary
             for (int i = 0; i < Line.Length; i++)
             {
                 if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.BinarySearch(alphavit, Line[i]);
+                else massive[i] = Array.IndexOf(alphavit, Line[i]);
             }
 
             return massive;
         }
-
-        public void Display()
-        {
-            var result = GetArrayAlphavitWithStepAndSide();
-
-            foreach (var item in result)
-            {
-                Console.Write($"[{Array.IndexOf(result, item)}]{item} {(uint)item}  ");
-            }
-
-            var resultTwo = GetArrayKeys(result);
-
-            Console.WriteLine("\n_________");
-
-            foreach (var item in resultTwo)
-            {
-                Console.Write($"  {item}  ");
-            }
-        }
-
-
 
         public override string Encrypt() 
         {
