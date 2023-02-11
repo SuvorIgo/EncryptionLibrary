@@ -30,6 +30,36 @@ namespace EncryptionLibrary
             Side = side;
         }
 
+        public override string Encrypt()
+        {
+            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
+            var keys = GetArrayKeys(arrayAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += encryptionAlphavit[keys[i]];
+            }
+
+            return result;
+        }
+
+        public override string Decrypt()
+        {
+            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
+            var keys = GetArrayKeys(encryptionAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += arrayAlphavit[keys[i]];
+            }
+
+            return result;
+        }
+
         private char[] GetArrayAlphavitWithStep()
         {
             char[] result = new char[26];
@@ -106,36 +136,6 @@ namespace EncryptionLibrary
             }
 
             return massive;
-        }
-
-        public override string Encrypt() 
-        {
-            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
-            var keys = GetArrayKeys(arrayAlphavit);
-            var result = String.Empty;
-
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (keys[i] == -1) result += " ";
-                else result += encryptionAlphavit[keys[i]];
-            }
-            
-            return result; 
-        }
-
-        public override string Decrypt() 
-        {
-            var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
-            var keys = GetArrayKeys(encryptionAlphavit);
-            var result = String.Empty;
-
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (keys[i] == -1) result += " ";
-                else result += arrayAlphavit[keys[i]];
-            }
-
-            return result;
         }
     }
 }
