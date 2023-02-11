@@ -19,7 +19,7 @@ namespace EncryptionLibrary
             {
                 try
                 {
-                    if (Line.Length != lineKey.Length)
+                    if (Line.Length != value.Length)
                         throw new ArgumentException();
                     else
                         lineKey = value;
@@ -39,5 +39,32 @@ namespace EncryptionLibrary
 
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
+
+        private void GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin) 
+        {
+            messageBin = new string[Line.Length];
+            messageKeyBin = new string[Line.Length];
+
+            for (int i = 0; i < Line.Length; i++)
+            {
+                messageBin[i] = Convert.ToString(Line[i], 2);
+                messageKeyBin[i] = Convert.ToString(LineKey[i], 2); 
+            }
+        }
+
+        /*public void Display()
+        {
+            GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin);
+
+            foreach (var item in messageBin)
+            {
+                Console.Write($"0{item} ");
+            }
+            Console.WriteLine("");
+            foreach (var item in messageKeyBin)
+            {
+                Console.Write($"0{item} ");
+            }
+        }*/
     }
 }
