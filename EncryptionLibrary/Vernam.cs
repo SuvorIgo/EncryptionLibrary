@@ -31,7 +31,11 @@ namespace EncryptionLibrary
             } 
         }
 
-        public Vernam(string line) : base(line) { }
+        public Vernam(string line, string lineKey) 
+            : base(line) 
+        { 
+            LineKey = lineKey;
+        }
 
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
