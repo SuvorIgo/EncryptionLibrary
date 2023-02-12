@@ -19,7 +19,7 @@ namespace EncryptionLibrary
             {
                 try
                 {
-                    if (Line.Length != value.Length)
+                    if (Line.Length != value.Length || Line.Contains(" ") || value.Contains(" "))
                         throw new ArgumentException();
                     else
                         lineKey = value;
@@ -37,48 +37,59 @@ namespace EncryptionLibrary
             LineKey = lineKey;
         }
 
-        public override string Encrypt() { return "There is no implementation yet"; }
-        public override string Decrypt() { return "There is no implementation yet"; }
-
-        private string[] GetArrayEncryptionXor()
+        public override string Encrypt() 
         {
-            GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin);
+            var byteMassiveResult = GetArrayEncryptionXor();
+            var result = String.Empty;
 
-            var result = new string[messageBin.Length];
-            var resultLine = String.Empty;
-
-            for (int i = 0; i < messageBin.Length; i++)
+            for (int i = 0; i < byteMassiveResult.Length; i++)
             {
-                var lineCharOfBin = messageBin[i];
-                var lineKeyCharOfBin = messageKeyBin[i];
-                
-                for (int j = 0; j < lineCharOfBin.Length; j++)
-                {
-                    resultLine += lineCharOfBin[j] ^ lineKeyCharOfBin[j];
-                }
-                
-                result[i] = resultLine;
-                resultLine = String.Empty;
+                result += String.Concat(byteMassiveResult[i], " ");
             }
 
             return result;
         }
 
-        private void GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin) 
+        public override string Decrypt() 
+        { 
+            return "There is no implementation yet"; 
+        }
+
+        private byte[] GetArrayEncryptionXor()
         {
-            messageBin = new string[Line.Length];
-            messageKeyBin = new string[Line.Length];
+            GetArraysEncryptionMessageAndMessageKey(out byte[] messageBin, out byte[] messageKeyBin);
+            var result = new byte[messageKeyBin.Length];
+
+            for (int i = 0; i < messageBin.Length; i++)
+            {
+                result[i] = (byte)(messageBin[i] ^ messageKeyBin[i]);
+            }
+
+            return result;
+        }
+
+        private void GetArraysEncryptionMessageAndMessageKey(out byte[] messageBin, out byte[] messageKeyBin)
+        {
+            messageBin = Encoding.Default.GetBytes(Line);
+            messageKeyBin = Encoding.Default.GetBytes(LineKey);
+        }
+
+        private int[] GetArrayKeys(char[] alphavit)
+        {
+            int[] massive = new int[Line.Length];
 
             for (int i = 0; i < Line.Length; i++)
             {
-                messageBin[i] = String.Concat("0", Convert.ToString(Line[i], 2));
-                messageKeyBin[i] = String.Concat("0", Convert.ToString(LineKey[i], 2)); 
+                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
+                else massive[i] = Array.IndexOf(alphavit, Line[i]);
             }
+
+            return massive;
         }
 
         public void Display()
         {
-            GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin);
+            GetArraysEncryptionMessageAndMessageKey(out byte[] messageBin, out byte[] messageKeyBin);
             var result = GetArrayEncryptionXor();
 
             foreach (var item in messageBin)
@@ -95,6 +106,7 @@ namespace EncryptionLibrary
             {
                 Console.Write($"{item} ");
             }
+            Console.WriteLine($"\n{Encrypt()}");
         }
     }
 }
