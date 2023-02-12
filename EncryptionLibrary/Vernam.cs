@@ -40,6 +40,30 @@ namespace EncryptionLibrary
         public override string Encrypt() { return "There is no implementation yet"; }
         public override string Decrypt() { return "There is no implementation yet"; }
 
+        private string[] GetArrayEncryptionXor()
+        {
+            GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin);
+
+            var result = new string[messageBin.Length];
+            var resultLine = String.Empty;
+
+            for (int i = 0; i < messageBin.Length; i++)
+            {
+                var lineCharOfBin = messageBin[i];
+                var lineKeyCharOfBin = messageKeyBin[i];
+                
+                for (int j = 0; j < lineCharOfBin.Length; j++)
+                {
+                    resultLine += lineCharOfBin[j] ^ lineKeyCharOfBin[j];
+                }
+                
+                result[i] = resultLine;
+                resultLine = String.Empty;
+            }
+
+            return result;
+        }
+
         private void GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin) 
         {
             messageBin = new string[Line.Length];
@@ -47,24 +71,30 @@ namespace EncryptionLibrary
 
             for (int i = 0; i < Line.Length; i++)
             {
-                messageBin[i] = Convert.ToString(Line[i], 2);
-                messageKeyBin[i] = Convert.ToString(LineKey[i], 2); 
+                messageBin[i] = String.Concat("0", Convert.ToString(Line[i], 2));
+                messageKeyBin[i] = String.Concat("0", Convert.ToString(LineKey[i], 2)); 
             }
         }
 
-        /*public void Display()
+        public void Display()
         {
             GetArraysEncryptionMessageAndMessageKey(out string[] messageBin, out string[] messageKeyBin);
+            var result = GetArrayEncryptionXor();
 
             foreach (var item in messageBin)
             {
-                Console.Write($"0{item} ");
+                Console.Write($"{item} ");
             }
             Console.WriteLine("");
             foreach (var item in messageKeyBin)
             {
-                Console.Write($"0{item} ");
+                Console.Write($"{item} ");
             }
-        }*/
+            Console.WriteLine("");
+            foreach (var item in result)
+            {
+                Console.Write($"{item} ");
+            }
+        }
     }
 }
