@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO: Реализовать метод Decrypt()
+
 namespace EncryptionLibrary
 {
     public sealed class Vernam : Encryption
