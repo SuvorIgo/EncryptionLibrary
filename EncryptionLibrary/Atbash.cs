@@ -13,6 +13,7 @@ namespace EncryptionLibrary
         public override string Encrypt()
         {
             var keys = GetArrayKeys();
+
             Reverse();
 
             var result = String.Empty;
