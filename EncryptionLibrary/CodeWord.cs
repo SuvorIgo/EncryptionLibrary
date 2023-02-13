@@ -66,20 +66,7 @@ namespace EncryptionLibrary
                 else result += arrayAlphavit[keys[i]];
             }
 
-            return "There is no implementation yet;
-        }
-
-        private int[] GetArrayKeys(char[] alphavit)
-        {
-            int[] massive = new int[Line.Length];
-
-            for (int i = 0; i < Line.Length; i++)
-            {
-                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.IndexOf(alphavit, Line[i]);
-            }
-
-            return massive;
+            return "There is no implementation yet";
         }
 
         private char[] GetArrayEncryptionAlphavit()

@@ -12,7 +12,7 @@ namespace EncryptionLibrary
 
         public override string Encrypt()
         {
-            var keys = GetArrayKeys();
+            var keys = GetArrayKeys(arrayAlphavit);
 
             Reverse();
 
@@ -29,7 +29,7 @@ namespace EncryptionLibrary
 
         public override string Decrypt()
         {
-            var keys = GetArrayKeys();
+            var keys = GetArrayKeys(arrayAlphavit);
 
             Reverse();
 
@@ -42,19 +42,6 @@ namespace EncryptionLibrary
             }
 
             return result;
-        }
-
-        private int[] GetArrayKeys()
-        {
-            int[] massive = new int[Line.Length];
-
-            for (int i = 0; i < Line.Length; i++)
-            {
-                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.IndexOf(arrayAlphavit, Line[i]);
-            }
-
-            return massive;
         }
 
         private void Reverse() => Array.Reverse(arrayAlphavit);
