@@ -40,5 +40,19 @@ namespace EncryptionLibrary
         public override string Encrypt() => "There is no implementation yet";
         public override string Decrypt() => "There is no implementation yet";
 
+        private char[] GetArrayLineKeyWithoutRepeat()
+        {
+            var result = new char[];
+
+            for (int i = 0; i < LineKey.Length; i++)
+            {
+                if (result.Contains(LineKey[i]))
+                    continue;
+                result[i] = LineKey[i];
+            }
+
+            return result;
+        }
+
     }
 }
