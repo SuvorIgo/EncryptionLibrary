@@ -19,7 +19,19 @@ namespace EncryptionLibrary
 
         public Polybius(string line) : base(line) { }
 
-        public override string Encrypt() => "There is no implementation yet";
+        public override string Encrypt()
+        {
+            var result = String.Empty;
+
+            for (int i = 0; i < Line.Length; i++)
+            {
+                string symbol = Convert.ToString(Line[i]);
+                result += encryptionAlphavit[symbol];
+            }
+
+            return result;
+        }
+
         public override string Decrypt() => "There is no implementation yet";
     }
 }
