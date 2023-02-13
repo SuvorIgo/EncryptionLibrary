@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+//TODO: Реализовать методы Encrypt() и Decrypt();
 namespace EncryptionLibrary
 {
     public sealed class CodeWord : Encryption
@@ -20,7 +21,7 @@ namespace EncryptionLibrary
             {
                 try
                 {
-                    if (value.Contains(" "))
+                    if (value.Contains(' '))
                         throw new ArgumentException();
                     else
                         lineKey = value;
@@ -43,22 +44,14 @@ namespace EncryptionLibrary
 
         private char[] GetArrayLineKeyWithoutRepeat()
         {
-            Regex regex = new Regex(@"\s");
-
             var result = new char[LineKey.Length];
 
             for (int i = 0; i < LineKey.Length; i++)
             {
-                if (result.Contains(LineKey[i]) || regex.IsMatch(Convert.ToString(result[i])))
-                {
-                    Array.Resize(ref result, result.Length -1);
-                    continue;
-                }
-
                 result[i] = LineKey[i];
             }
 
-            return result;
+            return result.Distinct().ToArray();
         }
 
         public void Display()
