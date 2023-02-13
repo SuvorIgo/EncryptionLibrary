@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-//TODO: Реализовать методы Encrypt() и Decrypt();
+//TODO: Поменять метод Decrypt()
 namespace EncryptionLibrary
 {
     public sealed class CodeWord : Encryption
@@ -39,8 +39,48 @@ namespace EncryptionLibrary
             LineKey = lineKey;
         }
 
-        public override string Encrypt() => "There is no implementation yet";
-        public override string Decrypt() => "There is no implementation yet";
+        public override string Encrypt()
+        {
+            var encryptionAlphavit = GetArrayEncryptionAlphavit();
+            var keys = GetArrayKeys(arrayAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += encryptionAlphavit[keys[i]];
+            }
+
+            return result;
+        }
+
+        public override string Decrypt()
+        {
+            var encryptionAlphavit = GetArrayEncryptionAlphavit();
+            var keys = GetArrayKeys(encryptionAlphavit);
+            var result = String.Empty;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i] == -1) result += " ";
+                else result += arrayAlphavit[keys[i]];
+            }
+
+            return result;
+        }
+
+        private int[] GetArrayKeys(char[] alphavit)
+        {
+            int[] massive = new int[Line.Length];
+
+            for (int i = 0; i < Line.Length; i++)
+            {
+                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
+                else massive[i] = Array.IndexOf(alphavit, Line[i]);
+            }
+
+            return massive;
+        }
 
         private char[] GetArrayEncryptionAlphavit()
         {
@@ -60,22 +100,6 @@ namespace EncryptionLibrary
             }
 
             return result.Distinct().ToArray();
-        }
-
-        public void Display()
-        {
-            var result = GetArrayLineKeyWithoutRepeat();
-            var resultTwo = GetArrayEncryptionAlphavit();
-
-            foreach (var item in result)
-            {
-                Console.Write($"{Array.IndexOf(result, item)}{item} ");
-            }
-            Console.WriteLine("\n____");
-            foreach (var item in resultTwo)
-            {
-                Console.Write($"{Array.IndexOf(resultTwo, item)}{item} ");
-            }
         }
     }
 }
