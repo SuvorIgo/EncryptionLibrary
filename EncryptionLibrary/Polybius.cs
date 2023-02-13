@@ -32,6 +32,16 @@ namespace EncryptionLibrary
             return result;
         }
 
-        public override string Decrypt() => "There is no implementation yet";
+        public override string Decrypt()
+        {
+            var result = String.Empty;
+            for (int i = 0; i < Line.Length; i++)
+            {
+                string symbol = Convert.ToString(Line[i] + Convert.ToString[i++]);
+                result += encryptionAlphavit.Where(p => p.Value == symbol).FirstOrDefault().Key;
+            }
+
+            return result;
+        }
     }
 }
