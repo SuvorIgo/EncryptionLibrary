@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Реализовать метод Decrypt()
+//TODO: Реализовать метод Decrypt();
 
 namespace EncryptionLibrary
 {
@@ -74,41 +74,6 @@ namespace EncryptionLibrary
         {
             messageBin = Encoding.Default.GetBytes(Line);
             messageKeyBin = Encoding.Default.GetBytes(LineKey);
-        }
-
-        private int[] GetArrayKeys(char[] alphavit)
-        {
-            int[] massive = new int[Line.Length];
-
-            for (int i = 0; i < Line.Length; i++)
-            {
-                if (Convert.ToString(Line[i]) == String.Empty) massive[i] = -1;
-                else massive[i] = Array.IndexOf(alphavit, Line[i]);
-            }
-
-            return massive;
-        }
-
-        public void Display()
-        {
-            GetArraysEncryptionMessageAndMessageKey(out byte[] messageBin, out byte[] messageKeyBin);
-            var result = GetArrayEncryptionXor();
-
-            foreach (var item in messageBin)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine("");
-            foreach (var item in messageKeyBin)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine("");
-            foreach (var item in result)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine($"\n{Encrypt()}");
         }
     }
 }
