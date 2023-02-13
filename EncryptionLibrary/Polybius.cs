@@ -10,11 +10,11 @@ namespace EncryptionLibrary
     {
         Dictionary<string, string> encryptionAlphavit = new Dictionary<string, string>()
         {
-            {"A", "11"}, {"B", "12"}, {"C", "13"}, {"D", "14"}, {"E", "15"}, {"F", "21"},
-            {"G", "22"}, {"H", "23"}, {"I", "24"}, {"J", "24"}, {"K", "25"}, {"L", "31"},
-            {"M", "32"}, {"N", "33"}, {"O", "34"}, {"P", "35"}, {"Q", "41"}, {"R", "42"},
-            {"S", "43"}, {"T", "44"}, {"U", "45"}, {"V", "51"}, {"W", "52"}, {"X", "53"},
-            {"Y", "54"}, {"Z", "55"}
+            {"a", "11"}, {"b", "12"}, {"c", "13"}, {"d", "14"}, {"e", "15"}, {"f", "21"},
+            {"g", "22"}, {"h", "23"}, {"i", "24"}, {"j", "24"}, {"k", "25"}, {"l", "31"},
+            {"m", "32"}, {"n", "33"}, {"o", "34"}, {"p", "35"}, {"q", "41"}, {"r", "42"},
+            {"s", "43"}, {"t", "44"}, {"u", "45"}, {"v", "51"}, {"w", "52"}, {"x", "53"},
+            {"y", "54"}, {"z", "55"}
         };
 
         public Polybius(string line) : base(line) { }
@@ -25,8 +25,17 @@ namespace EncryptionLibrary
 
             for (int i = 0; i < Line.Length; i++)
             {
-                string symbol = Convert.ToString(Line[i]);
-                result += encryptionAlphavit[symbol];
+                if (Line[i] == ' ')
+                {
+                    result += ' ';
+                    continue;
+                }
+                else
+                {
+                    string symbol = Convert.ToString(Line[i]);
+                    result += encryptionAlphavit[symbol];
+                }
+                
             }
 
             return result;
@@ -35,10 +44,19 @@ namespace EncryptionLibrary
         public override string Decrypt()
         {
             var result = String.Empty;
+
             for (int i = 0; i < Line.Length; i++)
             {
-                string symbol = Convert.ToString(Line[i] + Convert.ToString[i++]);
-                result += encryptionAlphavit.Where(p => p.Value == symbol).FirstOrDefault().Key;
+                if (Line[i] == ' ')
+                {
+                    result += ' ';
+                    continue;
+                }   
+                else
+                {
+                    string symbol = Convert.ToString(Line[i]) + Convert.ToString(Line[++i]);
+                    result += encryptionAlphavit.Where(p => p.Value == symbol).FirstOrDefault().Key;
+                }
             }
 
             return result;
