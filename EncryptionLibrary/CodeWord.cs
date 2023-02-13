@@ -42,6 +42,14 @@ namespace EncryptionLibrary
         public override string Encrypt() => "There is no implementation yet";
         public override string Decrypt() => "There is no implementation yet";
 
+        private char[] GetArrayEncryptionAlphavit()
+        {
+            var arrayLineKey = GetArrayLineKeyWithoutRepeat();
+            var result = arrayLineKey.Concat(arrayAlphavit).Distinct().ToArray();
+
+            return result;
+        }
+
         private char[] GetArrayLineKeyWithoutRepeat()
         {
             var result = new char[LineKey.Length];
@@ -57,10 +65,16 @@ namespace EncryptionLibrary
         public void Display()
         {
             var result = GetArrayLineKeyWithoutRepeat();
+            var resultTwo = GetArrayEncryptionAlphavit();
 
             foreach (var item in result)
             {
                 Console.Write($"{Array.IndexOf(result, item)}{item} ");
+            }
+            Console.WriteLine("\n____");
+            foreach (var item in resultTwo)
+            {
+                Console.Write($"{Array.IndexOf(resultTwo, item)}{item} ");
             }
         }
     }
