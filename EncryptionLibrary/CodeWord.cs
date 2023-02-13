@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-//TODO: Поменять метод Decrypt()
 namespace EncryptionLibrary
 {
     public sealed class CodeWord : Encryption
