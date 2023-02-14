@@ -8,6 +8,8 @@ namespace EncryptionLibrary
 {
     public sealed class Vernam : Encryption
     {
+        private static bool IsCalledEncrypt { get; set; } = false;
+
         private string lineKey;
         private string LineKey 
         {
@@ -46,6 +48,8 @@ namespace EncryptionLibrary
             {
                 result += String.Concat(byteMassiveResult[i], " ");
             }
+
+            IsCalledEncrypt = true;
 
             return result;
         }
