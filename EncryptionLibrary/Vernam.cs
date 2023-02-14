@@ -129,7 +129,7 @@ namespace EncryptionLibrary
             messageKeyBin = arrayBin.Select(p => p).ToArray();
         }
 
-        public void Display()
+        /*public void Display()
         {
             GetArraysEncryptionMessageAndMessageKey(out byte[] messageBin, out byte[] messageKeyBin);
             GetArraysEncryptionMessageAndMessageKey(new byte[] { 31, 22, 29, 16, 10, 3 }, out byte[] message, out byte[] messageKey);
@@ -155,6 +155,6 @@ namespace EncryptionLibrary
                 Console.Write($"{item} ");
             }
             Console.WriteLine(" - result");
-        }
+        }*/
     }
 }
