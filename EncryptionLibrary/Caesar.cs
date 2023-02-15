@@ -8,6 +8,8 @@ namespace EncryptionLibrary
 {
     public sealed class Caesar : Encryption
     {
+        private static bool IsCalledEncrypt { get; set; } = false;
+
         private int Step { get; set; }
         private string Side { get; set; } = "left";
 
@@ -41,6 +43,8 @@ namespace EncryptionLibrary
                 if (keys[i] == -1) result += " ";
                 else result += encryptionAlphavit[keys[i]];
             }
+
+            IsCalledEncrypt = true;
 
             return result;
         }
