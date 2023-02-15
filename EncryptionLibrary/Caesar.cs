@@ -52,13 +52,26 @@ namespace EncryptionLibrary
         public override string Decrypt()
         {
             var encryptionAlphavit = GetArrayAlphavitWithStepAndSide();
-            var keys = GetArrayKeys(encryptionAlphavit);
+
+            var keys = new int[arrayAlphavit.Length];
+
+            if (IsCalledEncrypt)
+            {
+                keys = GetArrayKeys(arrayAlphavit);
+            }
+            else
+            {
+                keys = GetArrayKeys(encryptionAlphavit);
+            }
+
             var result = String.Empty;
 
             for (int i = 0; i < keys.Length; i++)
             {
-                if (keys[i] == -1) result += " ";
-                else result += arrayAlphavit[keys[i]];
+                if (keys[i] == -1) 
+                    result += " ";
+                else 
+                    result += arrayAlphavit[keys[i]];    
             }
 
             return result;
@@ -68,14 +81,14 @@ namespace EncryptionLibrary
         {
             try
             {
-            char[] result = new char[26];
+                char[] result = new char[26];
 
-            switch (Side)
-            {
-                case "right":
-                    if (Step > 1)
-                        result[0] = (char)(arrayAlphavit[^1] - Step + 1);
-                    else 
+                switch (Side)
+                {
+                    case "right":
+                        if (Step > 1)
+                            result[0] = (char)(arrayAlphavit[^1] - Step + 1);
+                        else
                             result[0] = arrayAlphavit[^1];
                         break;
 
@@ -87,22 +100,22 @@ namespace EncryptionLibrary
                         throw new ArgumentException();
                 }
 
-                    for (int i = 1; i < arrayAlphavit.Length; i++)
+                for (int i = 1; i < arrayAlphavit.Length; i++)
+                {
+                    if (result[i - 1] == 'z')
                     {
-                        if (result[i - 1] == 'z')
-                        {
                         result[i] = (char)(arrayAlphavit[^1] - (arrayAlphavit.Length - 1));
-                            continue;
-                        }
-                        else
-                            result[i] = (char)(result[i - 1] + 1);
+                        continue;
+                    }
+                    else
+                        result[i] = (char)(result[i - 1] + 1);
 
                     if (result[i] == 'z')
-                        {
+                    {
                         result[i + 1] = (char)(arrayAlphavit[^1] - (arrayAlphavit.Length - 1));
                         i += 1;
-                        }
                     }
+                }
 
                 return result;
             }
