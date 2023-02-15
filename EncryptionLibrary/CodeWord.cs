@@ -65,7 +65,7 @@ namespace EncryptionLibrary
                 else result += arrayAlphavit[keys[i]];
             }
 
-            return "There is no implementation yet";
+            return result;
         }
 
         private char[] GetArrayEncryptionAlphavit()
