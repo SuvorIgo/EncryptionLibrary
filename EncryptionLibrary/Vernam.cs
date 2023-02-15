@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public sealed class Vernam : Encryption
     {
-        private static bool IsCalledEncrypt { get; set; } = false;
+        private bool IsCalledEncrypt { get; set; } = false;
 
         private string lineKey;
         private string LineKey 

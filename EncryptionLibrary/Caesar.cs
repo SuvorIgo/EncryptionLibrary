@@ -8,7 +8,7 @@ namespace EncryptionLibrary
 {
     public sealed class Caesar : Encryption
     {
-        private static bool IsCalledEncrypt { get; set; } = false;
+        private bool IsCalledEncrypt { get; set; } = false;
 
         private int Step { get; set; }
         private string Side { get; set; } = "left";
