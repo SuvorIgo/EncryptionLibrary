@@ -64,33 +64,10 @@ namespace EncryptionLibrary
             return result;
         }
 
-        private char[] GetArrayAlphavitWithStep()
-        {
-            char[] result = new char[26];
-           
-            result[0] = (char)(arrayAlphavit[0] + Step);
-
-            for (int i = 1; i < arrayAlphavit.Length; i++)
-            {
-                if (result[i-1] == 'z')
-                {
-                    result[i] = (char)(arrayAlphavit[^1] - 25);
-                    continue;
-                }
-                else
-                    result[i] = (char)(result[i-1] + 1);
-
-                if ((char)result[i] == 'z')
-                {
-                    result[i + 1] = (char)(arrayAlphavit[^1] - 25); i += 1;
-                }
-            }
-
-            return result;
-        }
-
         private char[] GetArrayAlphavitWithStepAndSide()
         {
+            try
+            {
             char[] result = new char[26];
 
             switch (Side)
@@ -99,34 +76,41 @@ namespace EncryptionLibrary
                     if (Step > 1)
                         result[0] = (char)(arrayAlphavit[^1] - Step + 1);
                     else 
-                        result[0] = (char)(arrayAlphavit[^1]);
+                            result[0] = arrayAlphavit[^1];
+                        break;
+
+                    case "left":
+                        result[0] = (char)(arrayAlphavit[0] + Step);
+                        break;
+
+                    default:
+                        throw new ArgumentException();
+                }
 
                     for (int i = 1; i < arrayAlphavit.Length; i++)
                     {
                         if (result[i - 1] == 'z')
                         {
-                            result[i] = (char)(arrayAlphavit[^1] - 25);
+                        result[i] = (char)(arrayAlphavit[^1] - (arrayAlphavit.Length - 1));
                             continue;
                         }
                         else
                             result[i] = (char)(result[i - 1] + 1);
 
-                        if ((char)result[i] == 'z')
+                    if (result[i] == 'z')
                         {
-                            result[i + 1] = (char)(arrayAlphavit[^1] - 25); i += 1;
+                        result[i + 1] = (char)(arrayAlphavit[^1] - (arrayAlphavit.Length - 1));
+                        i += 1;
                         }
                     }
 
-                    break;
-
-                case "left":
-                    result = GetArrayAlphavitWithStep();
-                    break;
-
-                default: throw new ArgumentException();
+                return result;
             }
-
-            return result;
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
     }
 }
